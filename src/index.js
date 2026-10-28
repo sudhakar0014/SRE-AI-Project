@@ -46,8 +46,8 @@ async function chat(request, env) {
     });
     answer = result.response || "I couldn't generate a response. Please try again.";
   } catch (error) {
-    console.error("Workers AI request failed", error?.message || error);
-    return json({ error: "AI analysis is temporarily unavailable. Check the Workers AI binding and model availability." }, 502);
+    console.error("LLM inference request failed", error?.message || error);
+    return json({ error: "AI analysis is temporarily unavailable. Check the LLM inference binding and model availability." }, 502);
   }
   await env.DB.prepare("INSERT INTO messages (id, incident_id, role, content, created_at) VALUES (?, ?, 'assistant', ?, ?)")
     .bind(id(), incidentId, answer, now()).run();

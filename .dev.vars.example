@@ -1,0 +1,2 @@
+# Optional local development variables. Do not commit secrets.
+# APP_NAME = "SRE Incident Copilot"

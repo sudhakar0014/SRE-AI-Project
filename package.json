@@ -1,8 +1,8 @@
 {
-  "name": "-ai-sre-copilot",
+  "name": "sre-incident-copilot",
   "version": "1.0.0",
   "private": true,
-  "description": "An AI-powered SRE incident investigation copilot built on  LLM inference, Workflows, Durable Objects, D1, and Pages assets.",
+  "description": "An AI-powered SRE incident investigation copilot built with an LLM inference runtime, durable workflows, stateful objects, SQL persistence, and web assets.",
   "type": "module",
   "scripts": {
     "dev": "wrangler dev",

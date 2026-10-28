@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0b1020"><meta name="description" content="An AI copilot for investigating production incidents with evidence-first SRE workflows.">
+  <title>SRE Copilot — Incident intelligence</title><link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="SRE Copilot home"><span class="brand-mark">✳</span><span><strong>SRE Copilot</strong><small>INCIDENT INTELLIGENCE</small></span></a>
+      <button id="newIncident" class="new-button"><span>＋</span> New investigation</button>
+      <div class="side-label">WORKSPACE</div>
+      <button class="nav-item active" data-view="chat"><span>◉</span> AI investigator</button>
+      <button class="nav-item" data-view="incidents"><span>▤</span> Incident history <span id="incidentCount" class="count">0</span></button>
+      <div class="side-label sample-label">TRY A SCENARIO</div>
+      <button class="scenario" data-scenario="pods">◈ <span><strong>CrashLoopBackOff</strong><small>Pods repeatedly restarting</small></span></button>
+      <button class="scenario" data-scenario="latency">⌁ <span><strong>Elevated latency</strong><small>p95 latency and 5xx errors</small></span></button>
+      <button class="scenario" data-scenario="capacity">▥ <span><strong>Node capacity</strong><small>Pods stuck Pending</small></span></button>
+      <div class="sidebar-bottom"><span class="status-dot"></span><span><strong>Demo workspace</strong><small>AI suggestions · human approval required</small></span></div>
+    </aside>
+    <main class="main-panel">
+      <header class="topbar"><div><span class="eyebrow">RELIABILITY WORKSPACE</span><h1 id="pageTitle">AI incident investigator</h1></div><div class="top-actions"><span class="secure-pill">⌁ Evidence-first AI</span><button id="refreshButton" class="icon-button" title="Refresh incident list" aria-label="Refresh">↻</button><div class="avatar">SRE</div></div></header>
+      <section id="chatView" class="chat-view">
+        <div class="welcome" id="welcome">
+          <div class="hero-icon">✳</div><div class="eyebrow">YOUR ON-CALL COPILOT</div>
+          <h2>Let's get production<br><span>back to healthy.</span></h2>
+          <p>Describe an incident or paste logs, metrics, and Kubernetes events. I'll help you separate facts from hypotheses and choose safe next steps.</p>
+          <div class="suggestion-grid">
+            <button class="suggestion" data-scenario="pods"><span class="suggestion-icon purple">◈</span><span><strong>Debug restarting pods</strong><small>CrashLoopBackOff, OOMKilled, probes</small></span><span class="arrow">↗</span></button>
+            <button class="suggestion" data-scenario="latency"><span class="suggestion-icon orange">⌁</span><span><strong>Investigate high latency</strong><small>p95 spikes and HTTP 5xx errors</small></span><span class="arrow">↗</span></button>
+            <button class="suggestion" data-scenario="capacity"><span class="suggestion-icon blue">▥</span><span><strong>Resolve pending pods</strong><small>Scheduling, capacity, and Karpenter</small></span><span class="arrow">↗</span></button>
+            <button class="suggestion" data-scenario="deploy"><span class="suggestion-icon green">⇧</span><span><strong>Review a deployment</strong><small>Regression and rollback considerations</small></span><span class="arrow">↗</span></button>
+          </div>
+        </div>
+        <div id="conversation" class="conversation" aria-live="polite"></div>
+        <div class="composer-wrap"><div class="composer"><textarea id="messageInput" rows="1" maxlength="12000" placeholder="Describe the incident, paste logs, or ask a follow-up…" aria-label="Incident message"></textarea><button id="sendButton" class="send-button" aria-label="Send message">↑</button></div><div class="composer-footer"><span>Enter to send · Shift + Enter for a new line</span><span class="human-note">AI output can be wrong. Verify before acting.</span></div></div>
+      </section>
+      <section id="incidentsView" class="incidents-view hidden"><div class="section-heading"><div><h2>Incident history</h2><p>Review previous investigations and saved findings.</p></div><button id="emptyNew" class="new-button compact">＋ New investigation</button></div><div id="incidentList" class="incident-list"></div></section>
+      <footer class="footer"><span>Built on Cloudflare Workers AI</span><span>Designed for humans in the loop <span class="footer-dot">●</span></span></footer>
+    </main>
+  </div>
+  <div id="toast" class="toast" role="status"></div>
+  <script src="/app.js" type="module"></script>
+</body></html>

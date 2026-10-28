@@ -50,7 +50,7 @@ async function sendMessage(text = input.value) {
     loading.remove(); addMessage('assistant', data.answer || 'No response was returned.');
     await refreshIncidents();
   } catch (error) {
-    loading.remove(); addMessage('assistant', `I couldn't complete the request. ${error.message}\n\nCheck that the Worker is running, the D1 migration has been applied, and Workers AI is enabled.`); toast('Request failed');
+    loading.remove(); addMessage('assistant', `I couldn't complete the request. ${error.message}\n\nCheck that the Worker is running, the D1 migration has been applied, and LLM inference is enabled.`); toast('Request failed');
   } finally { sendButton.disabled = false; input.focus(); }
 }
 async function refreshIncidents() {

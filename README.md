@@ -1,12 +1,12 @@
-# Cloudflare AI SRE Incident Copilot
+#  AI SRE Incident Copilot
 
-An AI-powered incident investigation workspace built with Cloudflare Workers AI, Workers, Workflows, Durable Objects, D1, and static assets served by Workers. It is designed as a practical reliability engineering demo: evidence first, safe diagnostics first, and a human approves any production change.
+An AI-powered incident investigation workspace built with  LLM inference, Workers, Workflows, Durable Objects, D1, and static assets served by Workers. It is designed as a practical reliability engineering demo: evidence first, safe diagnostics first, and a human approves any production change.
 
 ## What it does
 - Chat with an SRE-focused AI assistant about incidents, logs, metrics, and Kubernetes events.
-- Keep incident conversations and history in Cloudflare D1.
+- Keep incident conversations and history in  D1.
 - Use a Durable Object for bounded per-incident session state.
-- Start a retryable, multi-step Cloudflare Workflow for longer investigations.
+- Start a retryable, multi-step  Workflow for longer investigations.
 - Save investigation findings and incident severity/status.
 - Includes sample scenarios for CrashLoopBackOff/OOMKilled, latency and 5xx spikes, pending pods/Karpenter, and deployment regressions.
 - Includes tests and GitHub Actions CI.
@@ -17,17 +17,17 @@ An AI-powered incident investigation workspace built with Cloudflare Workers AI,
 ```mermaid
 flowchart LR
   U[Engineer] --> UI[Static chat UI / Workers assets]
-  UI --> W[Cloudflare Worker API]
-  W --> AI[Workers AI / Llama 3.3]
+  UI --> W[ Worker API]
+  W --> AI[LLM inference / Llama 3.3]
   W --> D1[(D1: incidents, messages, resolutions)]
   W --> DO[Durable Object: incident session]
-  W --> WF[Cloudflare Workflows]
+  W --> WF[ Workflows]
   WF --> AI
   WF --> D1
 ```
 
 ## Components
-- **Workers AI:** Uses `@cf/meta/llama-3.3-70b-instruct-fp8-fast` by default. Model availability and account access may vary; override `AI_MODEL` if needed.
+- **LLM inference:** Uses `@cf/meta/llama-3.3-70b-instruct-fp8-fast` by default. Model availability and account access may vary; override `AI_MODEL` if needed.
 - **Workers:** Validates input and exposes `/api/*` endpoints.
 - **Workflows:** Multi-step investigation: prepare input, analyze evidence, persist findings.
 - **Durable Objects:** Bounded recent-message buffer per incident.
@@ -36,7 +36,7 @@ flowchart LR
 
 ## Requirements
 - Node.js 20+
-- Cloudflare account with Workers AI enabled
+-  account with LLM inference enabled
 - Wrangler CLI (installed as a dev dependency)
 - Permission to create a D1 database and deploy Workers/Workflows
 
@@ -50,7 +50,7 @@ flowchart LR
 7. Open the local URL Wrangler prints and try a sample scenario.
 
 ## Deploy
-After configuring D1 and confirming Workers AI access:
+After configuring D1 and confirming LLM inference access:
 ```bash
 npx wrangler d1 migrations apply sre-copilot-db --remote
 npm run deploy
@@ -103,7 +103,7 @@ src/utils.js            Shared validation and prompt helpers
 migrations/             D1 schema
 tests/                  Unit tests
 .github/workflows/      CI
-wrangler.toml           Cloudflare bindings and deployment config
+wrangler.toml            bindings and deployment config
 ```
 
 ## Trade-offs
